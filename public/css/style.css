@@ -1,0 +1,27 @@
+/* Style for Edit button */
+.btn-edit {
+    background-color: #ffc107; /* Yellow background */
+    color: #212529; /* Dark text color */
+    border-color: #ffc107; /* Border color */
+}
+
+/* Hover effect for Edit button */
+.btn-edit:hover {
+    background-color: #ffca2b; /* Lighter yellow on hover */
+    color: #212529; /* Dark text color */
+    border-color: #ffca2b; /* Border color on hover */
+}
+
+/* Style for Delete button */
+.btn-delete {
+    background-color: #dc3545; /* Red background */
+    color: #fff; /* White text color */
+    border-color: #dc3545; /* Border color */
+}
+
+/* Hover effect for Delete button */
+.btn-delete:hover {
+    background-color: #c82333; /* Darker red on hover */
+    color: #fff; /* White text color */
+    border-color: #c82333; /* Border color on hover */
+}

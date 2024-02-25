@@ -30,11 +30,12 @@
                                 <div class="col">
                                     <div class="card mb-4">
                                         <div class="card-body">
-                                            <table id="dataDonatur" class="table-striped table-bordered table"
+                                            <table id="dataGeofencing" class="table-striped table-bordered table"
                                                 style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
+                                                        <th>Name</th>
                                                         <th>Alamat</th>
                                                         <th>Coordinate</th>
                                                         <th>Radius</th>
@@ -55,4 +56,51 @@
     </div>
     </div>
     </div>
+    <script>
+    $(document).ready(function() {
+        $('#dataGeofencing').DataTable({
+            stateSave: false,
+            processing: true,
+            serverSide: true,
+            iDisplayLength: 10,
+            aaSorting: [
+                [1, 'asc']
+            ],
+            ajax: '/geofencing',
+            dataType: 'json',
+            responsive: true,
+            columns: [{
+                    data: 'id',
+                    name: 'id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'address',
+                    name: 'address'
+                },
+                {
+                    data: 'coordinate',
+                    name: 'coordinate'
+                },
+                {
+                    data: 'radius', 
+                    name: 'radius'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
+            ],
+            lengthMenu: [
+                [5, 10, 20, -1],
+                [5, 10, 20, 'All']
+            ],
+        });
+    });
+    </script>
 @endsection

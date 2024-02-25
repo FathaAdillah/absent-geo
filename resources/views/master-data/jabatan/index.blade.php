@@ -21,7 +21,7 @@
                                 <div class="col-lg-10"></div>
                                 <div class="col-lg-2">
                                     <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#addDonatur">
+                                        data-bs-target="#addJabatan">
                                         + Jabatan
                                     </button>
                                 </div>
@@ -30,7 +30,7 @@
                                 <div class="col">
                                     <div class="card mb-4">
                                         <div class="card-body">
-                                            <table id="dataDonatur" class="table-striped table-bordered table"
+                                            <table id="dataJabatan" class="table-striped table-bordered table"
                                                 style="width:100%">
                                                 <thead>
                                                     <tr>
@@ -53,4 +53,39 @@
     </div>
     </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#dataJabatan').DataTable({
+                stateSave: false,
+                processing: true,
+                serverSide: true,
+                iDisplayLength: 10,
+                aaSorting: [
+                    [1, 'desc']
+                ],
+                ajax: '/jabatan',
+                dataType: 'json',
+                responsive: true,
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                lengthMenu: [
+                    [5, 10, 20, -1],
+                    [5, 10, 20, 'All']
+                ],
+            });
+        });
+    </script>
 @endsection

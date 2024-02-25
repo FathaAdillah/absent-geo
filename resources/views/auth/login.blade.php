@@ -63,7 +63,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Email address</label>
                                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                                        placeholder="Email Address" autofocus required value="{{ old('email') }}" autocomplete="off" />
+                                        placeholder="Email Address" autofocus required value="{{ old('email') }}" autocomplete="on" />
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label">

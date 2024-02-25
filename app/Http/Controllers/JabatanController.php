@@ -18,20 +18,22 @@ class JabatanController extends Controller
         $user = Auth::user();
         try {
             if (request()->ajax()) {
-                $dataTable = DataTables::of(DB::select('jabatan'))->setRowId('id');
-                $dataTable->addColumn('action', function ($jabatan) {
-                    // Update Button
-                    $button = "<button class='btn btn-sm btn-warning btn-edit' data-id='" . $jabatan->id . "'><i class='fas fa-edit'></i></button>";
-                    // Delete Button
-                    $button .= " <button class='btn btn-sm btn-danger btn-delete' data-id='" . $jabatan->id . "'><i class='fas fa-trash'></i></button>";
-                    return $button;
-                });
+                $dataTable = DataTables::of(Jabatan::query())
+                    ->setRowId('id')
+                    ->addColumn('action', function ($jabatan) {
+                        // Update Button
+                        $button = "<button class='btn btn-warning btn-edit' data-id='" . $jabatan->id . "'><i class='fas fa-edit'></i></button>";
+                        // Delete Button
+                        $button .= " <button class='btn btn-danger btn-delete' data-id='" . $jabatan->id . "'><i class='fas fa-trash'></i></button>";
+                        return $button;
+                    });
                 return $dataTable->escapeColumns([])->make(true);
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
+
         return view('master-data.jabatan.index', [
             'user' => $user
         ]);

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Jabatan;
+use App\Models\Geofencing;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -18,20 +17,22 @@ class GeofencingController extends Controller
         $user = Auth::user();
         try {
             if (request()->ajax()) {
-                $dataTable = DataTables::of(DB::select('geofencing'))->setRowId('id');
-                $dataTable->addColumn('action', function ($jabatan) {
-                    // Update Button
-                    $button = "<button class='btn btn-sm btn-warning btn-edit' data-id='" . $jabatan->id . "'><i class='fas fa-edit'></i></button>";
-                    // Delete Button
-                    $button .= " <button class='btn btn-sm btn-danger btn-delete' data-id='" . $jabatan->id . "'><i class='fas fa-trash'></i></button>";
-                    return $button;
-                });
+                $dataTable = DataTables::of(Geofencing::query())
+                    ->setRowId('id')
+                    ->addColumn('action', function ($geofencing) {
+                        // Update Button
+                        $button = "<button class='btn btn-warning btn-edit' data-id='" . $geofencing->id . "'><i class='fas fa-edit'></i></button>";
+                        // Delete Button
+                        $button .= " <button class='btn btn-danger btn-delete' data-id='" . $geofencing->id . "'><i class='fas fa-trash'></i></button>";
+                        return $button;
+                    });
                 return $dataTable->escapeColumns([])->make(true);
             }
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
+
         return view('master-data.geofencing.index', [
             'user' => $user
         ]);

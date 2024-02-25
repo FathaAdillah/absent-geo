@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GeofencingController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PegawaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/jabatan', [JabatanController::class, 'index'])->name('jabatan');
     Route::get('/geofencing', [GeofencingController::class, 'index'])->name('geofencing');
+    Route::get('/datapegawai', [PegawaiController::class, 'index'])->name('datapegawai');
 
 
 

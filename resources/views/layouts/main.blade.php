@@ -15,11 +15,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title></title>
     <!-- CSS files -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('/dist/css/tabler.min.css?1684106062') }}" rel="stylesheet" />
     <link href="{{ asset('/dist/css/tabler-flags.min.css?1684106062') }}" rel="stylesheet" />
     <link href="{{ asset('/dist/css/tabler-vendors.min.css?1684106062') }}" rel="stylesheet" />
     <link href="{{ asset('/dist/css/demo.min.css?1684106062') }}" rel="stylesheet" />
     <link href="{{ asset('/dist/css/tabler-payments.min.css?1684106062') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/datatables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -35,6 +45,9 @@
 
 <body>
     <script src="./dist/js/demo-theme.min.js?1684106062"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/r-2.5.0/datatables.min.js"></script>
     <div class="page">
         <!-- Navbar -->
         <header class="navbar navbar-expand-md d-print-none">
@@ -111,7 +124,7 @@
                                 style="background-image: url('{{ $user->photourl }}"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ $user->name }}</div>
-                                <div class="mt-1 small text-muted">{{$user->role->nama}}</div>
+                                <div class="mt-1 small text-muted">{{ $user->role->nama }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -127,7 +140,7 @@
                 <div class="navbar">
                     <div class="container-xl">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('dashboard') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
@@ -182,17 +195,16 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="{{ route('datapegawai') }}">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-user" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M9 11l3 3l8 -8" />
-                                            <path
-                                                d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+                                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
@@ -205,13 +217,19 @@
                                     data-bs-auto-close="outside" role="button" aria-expanded="false">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-calendar" width="24"
                                             height="24" viewBox="0 0 24 24" stroke-width="2"
                                             stroke="currentColor" fill="none" stroke-linecap="round"
                                             stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                                                d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" />
+                                            <path d="M16 3v4" />
+                                            <path d="M8 3v4" />
+                                            <path d="M4 11h16" />
+                                            <path d="M11 15h1" />
+                                            <path d="M12 15v3" />
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
@@ -222,47 +240,37 @@
                                     <div class="dropdown-menu-columns">
                                         <div class="dropdown-menu-column">
                                             <a class="dropdown-item" href="./logs.html">
-                                                Logs
-                                                <span
-                                                    class="badge badge-sm bg-green-lt text-uppercase ms-auto">New</span>
+                                                Hari ini
+                                            </a>
+                                            <a class="dropdown-item" href="./logs.html">
+                                                All Absensi
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <li class="nav-item">
+                                <a class="nav-link" href="">
                                     <span
                                         class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/layout-2 -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-calendar-off" width="24"
                                             height="24" viewBox="0 0 24 24" stroke-width="2"
                                             stroke="currentColor" fill="none" stroke-linecap="round"
                                             stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <path
-                                                d="M4 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                            <path
-                                                d="M4 13m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                            <path
-                                                d="M14 4m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v3a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
-                                            <path
-                                                d="M14 15m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+                                                d="M9 5h9a2 2 0 0 1 2 2v9m-.184 3.839a2 2 0 0 1 -1.816 1.161h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.158 -1.815" />
+                                            <path d="M16 3v4" />
+                                            <path d="M8 3v1" />
+                                            <path d="M4 11h7m4 0h5" />
+                                            <path d="M3 3l18 18" />
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
                                         Pengajuan Cuti
                                     </span>
                                 </a>
-                                <div class="dropdown-menu">
-                                    <div class="dropdown-menu-columns">
-                                        <div class="dropdown-menu-column">
-                                            <a class="dropdown-item" href="./layout-navbar-dark.html">
-                                                Navbar dark
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
                             </li>
                         </ul>
                         <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
@@ -331,6 +339,51 @@
         <!-- Tabler Core -->
         <script src="{{ asset('/dist/js/tabler.min.js?1684106062') }}" defer></script>
         <script src="{{ asset('/dist/js/demo.min.js?1684106062') }}" defer></script>
+        <script type="text/javascript">
+            const getCurrentTimeDate = () => {
+                let currentTimeDate = new Date();
+    
+                var weekday = new Array(7);
+                weekday[0] = "Minggu";
+                weekday[1] = "Senin";
+                weekday[2] = "Selasa";
+                weekday[3] = "Rabu";
+                weekday[4] = "Kamis";
+                weekday[5] = "Jumat";
+                weekday[6] = "Sabtu";
+    
+    
+    
+                var month = new Array();
+                month[0] = "January";
+                month[1] = "February";
+                month[2] = "March";
+                month[3] = "April";
+                month[4] = "May";
+                month[5] = "June";
+                month[6] = "July";
+                month[7] = "August";
+                month[8] = "September";
+                month[9] = "October";
+                month[10] = "November";
+                month[11] = "December";
+    
+                var currentDay = weekday[currentTimeDate.getDay()];
+    
+                var currentDate = currentTimeDate.getDate();
+                var currentMonth = month[currentTimeDate.getMonth()];
+                var CurrentYear = currentTimeDate.getFullYear();
+    
+                var fullDate = `${currentDate} ${currentMonth} ${CurrentYear}`;
+    
+                document.getElementById("date").innerHTML = fullDate;
+                document.getElementById("day").innerHTML = currentDay;
+    
+                setTimeout(getCurrentTimeDate, 500);
+    
+            }
+            getCurrentTimeDate();
+        </script>
 </body>
 
 </html>
